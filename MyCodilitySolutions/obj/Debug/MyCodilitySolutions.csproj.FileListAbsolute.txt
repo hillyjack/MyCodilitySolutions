@@ -1,0 +1,7 @@
+C:\Users\hilly\Desktop\C#\0 - Codility\MyCodilitySolutions\MyCodilitySolutions\MyCodilitySolutions\bin\Debug\MyCodilitySolutions.exe.config
+C:\Users\hilly\Desktop\C#\0 - Codility\MyCodilitySolutions\MyCodilitySolutions\bin\Debug\MyCodilitySolutions.exe.config
+C:\Users\hilly\Desktop\C#\0 - Codility\MyCodilitySolutions\MyCodilitySolutions\bin\Debug\MyCodilitySolutions.exe
+C:\Users\hilly\Desktop\C#\0 - Codility\MyCodilitySolutions\MyCodilitySolutions\bin\Debug\MyCodilitySolutions.pdb
+C:\Users\hilly\Desktop\C#\0 - Codility\MyCodilitySolutions\MyCodilitySolutions\obj\Debug\MyCodilitySolutions.csprojResolveAssemblyReference.cache
+C:\Users\hilly\Desktop\C#\0 - Codility\MyCodilitySolutions\MyCodilitySolutions\obj\Debug\MyCodilitySolutions.exe
+C:\Users\hilly\Desktop\C#\0 - Codility\MyCodilitySolutions\MyCodilitySolutions\obj\Debug\MyCodilitySolutions.pdb
