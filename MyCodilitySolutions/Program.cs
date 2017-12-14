@@ -35,8 +35,6 @@ namespace MyCodilitySolutions
             return CounterD;
         }
 
-
-
         public static int TapeEquilibrium(int[] A)
         {
             int N = A.Length;
