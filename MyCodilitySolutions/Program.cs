@@ -10,10 +10,11 @@ namespace MyCodilitySolutions
     {
         static void Main(string[] args)
         {
-            int[] A = { 3, 1, 2, 4, 3 };
 
-            Console.WriteLine(TapeEquilibrium(A));
-
+            
+            //var bigRange = Enumerable.Range(1, 99999).ToArray();
+            //Console.WriteLine(PermMissingElem(bigRange));
+            //Console.WriteLine(TapeEquilibrium(new int[] { 3, 1, 2, 4, 3 }));
             //Console.WriteLine(FrogJmp(10, 85, 30));
             //Console.WriteLine(FindMultiplesInRange(2, 21, 2));
 
@@ -33,9 +34,9 @@ namespace MyCodilitySolutions
             }
 
             return CounterD;
-        }
+        } //100%
 
-        public static int TapeEquilibrium(int[] A)
+        public static int TapeEquilibrium2(int[] A)
         {
             int N = A.Length;
             int[] P = new int[N - 1];
@@ -46,20 +47,61 @@ namespace MyCodilitySolutions
             }
 
             return P.Min();
-        }
+        }// Not Good- O(N*N) instead of O(N)
 
-        public static int TapeEquilibrium2(int[] A)
+        public static int TapeEquilibrium(int[] A)
         {
-            int N = A.Length;
-            int[] P = new int[N - 1];
+            int[] Sums = new int[A.Length];
+            Sums[0] = A[0];
 
-            for (int i = 0; i < P.Length; i++)
+            for (int i = 1; i < A.Length; i++)
             {
-                P[i] = Math.Abs((A.Take(i + 1).ToArray()).Sum() - (A.Skip(i + 1).ToArray()).Sum());
+                Sums[i] = (Sums[i - 1] + A[i]);
             }
 
-            return P.Min();
-        }// Not Good- O(N*N) instead of O(N)
+            int MinDifference = int.MaxValue;
+            int ArraySum = Sums.Length - 1;
+
+            for (int j = 0; j < Sums.Length - 1; j++)
+            {
+                int Difference = Math.Abs(Sums[j] - (Sums[ArraySum] - Sums[j]));
+                MinDifference = (Difference < MinDifference ? Difference : MinDifference);
+            }
+
+            return MinDifference;
+        }// 100%
+
+        public static int PermMissingElem2(int[] A)
+        {
+            long ArraySum = 0, RangeSum = A.Length + 1;
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                RangeSum += i + 1;
+                ArraySum += A[i];
+            }
+
+            return (int)(RangeSum - ArraySum);
+        }//option 2 100%
+
+        public static int PermMissingElem(int[] A)
+        {
+            long ArraySum = 0;
+
+            foreach (int Num in A)
+            {
+                ArraySum += Num;
+            }
+
+            long TopRange = A.Length + 1;
+            long RangeSum = (TopRange * (TopRange + 1)) / 2;
+
+            return (int)(RangeSum - ArraySum);
+        }//option 1 100%
+
+        public static int FrogRiverOne(int X, int[] A) {
+            return 0;
+        }
 
     }
 }
