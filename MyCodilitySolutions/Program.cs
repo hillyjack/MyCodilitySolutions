@@ -10,8 +10,11 @@ namespace MyCodilitySolutions
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(FrogRiverOne(5, new int[] { 1, 3, 1, 4, 2, 3, 2, 4 }));//-1
+            Console.WriteLine(FrogRiverOne(4, new int[] { 1, 3, 1, 4, 2, 3, 2, 4 }));//4
+            Console.WriteLine(FrogRiverOne(3, new int[] { 1, 3, 1, 1, 3 }));//-1
+            Console.WriteLine(FrogRiverOne(5, new int[] { 1, 3, 1, 4, 2, 3, 5, 4 }));//6
 
-            
             //var bigRange = Enumerable.Range(1, 99999).ToArray();
             //Console.WriteLine(PermMissingElem(bigRange));
             //Console.WriteLine(TapeEquilibrium(new int[] { 3, 1, 2, 4, 3 }));
@@ -99,9 +102,49 @@ namespace MyCodilitySolutions
             return (int)(RangeSum - ArraySum);
         }//option 1 100%
 
-        public static int FrogRiverOne(int X, int[] A) {
-            return 0;
-        }
+        public static int FrogRiverOne(int X, int[] A)
+        {
+            long positionSum = (long)(X * (X + 1)) / 2;
+            int[] Leaves = new int[X];
+            int LeavesSum = 0, Seconds = 0;
 
+            for (int i = 0; i < A.Length && LeavesSum != positionSum; i++)
+            {
+                if (Leaves[A[i] - 1] == 0)
+                {
+                    Leaves[A[i] - 1] = A[i];
+                    LeavesSum += A[i];
+                    Seconds = i;
+                }
+            }
+
+            if (LeavesSum != positionSum)
+                Seconds = -1;
+
+            return Seconds;
+        }//option 1 100%
+
+        public static int FrogRiverOne2(int X, int[] A)
+        {
+            bool[] leavesInPosition = new bool[X + 1];
+
+            int occupiedPositions = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                int position = A[i];
+                if (position <= X && !leavesInPosition[position])
+                {
+                    leavesInPosition[position] = true;
+                    occupiedPositions++;
+                }
+
+                if (occupiedPositions == X)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }//option 2
     }
 }
