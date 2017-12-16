@@ -10,11 +10,10 @@ namespace MyCodilitySolutions
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(FrogRiverOne(5, new int[] { 1, 3, 1, 4, 2, 3, 2, 4 }));//-1
-            Console.WriteLine(FrogRiverOne(4, new int[] { 1, 3, 1, 4, 2, 3, 2, 4 }));//4
-            Console.WriteLine(FrogRiverOne(3, new int[] { 1, 3, 1, 1, 3 }));//-1
-            Console.WriteLine(FrogRiverOne(5, new int[] { 1, 3, 1, 4, 2, 3, 5, 4 }));//6
 
+            Console.WriteLine(PermCheck(new int[] { 4, 1, 3, 2 }));
+            Console.WriteLine(PermCheck(new int[] { 4, 1, 3 }));
+            //Console.WriteLine(FrogRiverOne(5, new int[] { 1, 3, 1, 4, 2, 3, 5, 4 }));//6
             //var bigRange = Enumerable.Range(1, 99999).ToArray();
             //Console.WriteLine(PermMissingElem(bigRange));
             //Console.WriteLine(TapeEquilibrium(new int[] { 3, 1, 2, 4, 3 }));
@@ -146,5 +145,22 @@ namespace MyCodilitySolutions
 
             return -1;
         }//option 2
+
+        public static int PermCheck(int[] A)
+        {
+            int isPermutation = 1, isNotPermutation = 0, N = A.Length;
+            int[] Permutation = new int[N];
+
+            for (int i = 0; i < N; i++)
+            {
+                if (A[i] <= N && Permutation[A[i] - 1] == 0)
+                {
+                    Permutation[A[i] - 1] = A[i];
+                }
+                else
+                    return isNotPermutation;
+            }
+            return isPermutation;
+        } //100%
     }
 }
