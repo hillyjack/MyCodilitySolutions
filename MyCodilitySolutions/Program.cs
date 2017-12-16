@@ -11,8 +11,12 @@ namespace MyCodilitySolutions
         static void Main(string[] args)
         {
 
-            Console.WriteLine(PermCheck(new int[] { 4, 1, 3, 2 }));
-            Console.WriteLine(PermCheck(new int[] { 4, 1, 3 }));
+            Console.WriteLine(MissingInteger(new int[] { 1, 3, 6, 4, 1, 2 }));//5
+            Console.WriteLine(MissingInteger(new int[] { 1, 2, 3 }));//4
+            Console.WriteLine(MissingInteger(new int[] { -1, -3 }));//1
+
+            //Console.WriteLine(PermCheck(new int[] { 4, 1, 3, 2 }));//1
+            //Console.WriteLine(PermCheck(new int[] { 4, 1, 3 }));//0
             //Console.WriteLine(FrogRiverOne(5, new int[] { 1, 3, 1, 4, 2, 3, 5, 4 }));//6
             //var bigRange = Enumerable.Range(1, 99999).ToArray();
             //Console.WriteLine(PermMissingElem(bigRange));
@@ -162,5 +166,51 @@ namespace MyCodilitySolutions
             }
             return isPermutation;
         } //100%
+
+        public static int MissingInteger(int[] A)
+        {
+            int N = A.Length;
+            int[] FindingInteger = new int[N];
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] <= N && A[i] > 0)
+                {
+                    if (FindingInteger[A[i] - 1] == 0)
+                        FindingInteger[A[i] - 1] = A[i];
+                }
+            }
+
+            for (int j = 0; j < FindingInteger.Length; j++)
+            {
+                if (FindingInteger[j] == 0)
+                    return j + 1;
+            }
+            return N + 1;
+        }// 100%
+
+        public static int MissingInteger2(int[] A)
+        {
+            int maxSize = 100000; 
+            int[] counter = new int[maxSize];
+
+            foreach (int number in A)
+            {
+                if (number > 0 && number <= maxSize)
+                {
+                    counter[number - 1] = 1;
+                }
+            }
+
+            for (int i = 0; i < maxSize; i++)
+            {
+                if (counter[i] == 0)
+                {
+                    return i + 1;
+                }
+            }
+
+            return maxSize + 1;
+        }
     }
 }
