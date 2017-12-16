@@ -10,10 +10,11 @@ namespace MyCodilitySolutions
     {
         static void Main(string[] args)
         {
+            PrintArray(MaxCounters(5, new int[] { 3, 4, 4, 6, 1, 4, 4 }));
 
-            Console.WriteLine(MissingInteger(new int[] { 1, 3, 6, 4, 1, 2 }));//5
-            Console.WriteLine(MissingInteger(new int[] { 1, 2, 3 }));//4
-            Console.WriteLine(MissingInteger(new int[] { -1, -3 }));//1
+            //Console.WriteLine(MissingInteger(new int[] { 1, 3, 6, 4, 1, 2 }));//5
+            //Console.WriteLine(MissingInteger(new int[] { 1, 2, 3 }));//4
+            //Console.WriteLine(MissingInteger(new int[] { -1, -3 }));//1
 
             //Console.WriteLine(PermCheck(new int[] { 4, 1, 3, 2 }));//1
             //Console.WriteLine(PermCheck(new int[] { 4, 1, 3 }));//0
@@ -24,6 +25,16 @@ namespace MyCodilitySolutions
             //Console.WriteLine(FrogJmp(10, 85, 30));
             //Console.WriteLine(FindMultiplesInRange(2, 21, 2));
 
+        }
+
+        public static void PrintArray(int[] A)
+        {
+            Console.Write("[");
+            foreach (int item in A)
+            {
+                Console.Write(item + ", ");
+            }
+            Console.Write("]");
         }
 
         public static int FindMultiplesInRange(int A, int B, int K)
@@ -191,7 +202,7 @@ namespace MyCodilitySolutions
 
         public static int MissingInteger2(int[] A)
         {
-            int maxSize = 100000; 
+            int maxSize = 100000;
             int[] counter = new int[maxSize];
 
             foreach (int number in A)
@@ -212,5 +223,29 @@ namespace MyCodilitySolutions
 
             return maxSize + 1;
         }
+
+        public static int[] MaxCounters(int N, int[] A)
+        {
+            int CurrentMaxVal = 0, SetMaxCounter = 0;
+
+            int[] Counters = new int[N];
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] < N + 1)
+                {
+                    Counters[A[i] - 1] = Counters[A[i] - 1] < SetMaxCounter ? SetMaxCounter + 1 : Counters[A[i] - 1] + 1;
+                    CurrentMaxVal = CurrentMaxVal > Counters[A[i] - 1] ? CurrentMaxVal : Counters[A[i] - 1];
+                }
+                else
+                    SetMaxCounter = CurrentMaxVal;
+            }
+
+            for (int j = 0; j < Counters.Length; j++)
+            {
+                Counters[j] = Counters[j] < SetMaxCounter ? SetMaxCounter : Counters[j];
+            }
+            return Counters;
+        } // 100%
     }
 }
