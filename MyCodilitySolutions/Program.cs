@@ -10,7 +10,9 @@ namespace MyCodilitySolutions
     {
         static void Main(string[] args)
         {
-            PrintArray(MaxCounters(5, new int[] { 3, 4, 4, 6, 1, 4, 4 }));
+            Console.WriteLine(PassingCars(new int[] { 0, 1, 0, 1, 1 }));//5
+
+            //PrintArray(MaxCounters(5, new int[] { 3, 4, 4, 6, 1, 4, 4 }));
 
             //Console.WriteLine(MissingInteger(new int[] { 1, 3, 6, 4, 1, 2 }));//5
             //Console.WriteLine(MissingInteger(new int[] { 1, 2, 3 }));//4
@@ -247,5 +249,23 @@ namespace MyCodilitySolutions
             }
             return Counters;
         } // 100%
+
+        public static int PassingCars(int[] A)
+        {
+            int eastCars = 0, Passing = 0, MaxPass = 1000000000;
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] == 0)
+                    eastCars++;
+                else
+                    Passing += eastCars;
+
+                if (Passing > MaxPass)
+                    return -1;
+            }
+
+            return Passing;
+        } //100%
     }
 }
