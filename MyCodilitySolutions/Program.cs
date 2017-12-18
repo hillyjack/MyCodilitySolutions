@@ -10,7 +10,27 @@ namespace MyCodilitySolutions
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(PassingCars(new int[] { 0, 1, 0, 1, 1 }));//5
+            Console.WriteLine(solutionString(@"my.song.mp3 11b
+greatSong.flac 1000b
+not3.txt 5b
+video.mp4 200b
+game.exe 100b
+mov!e.mkv 10000b"));
+
+            //Console.WriteLine(Binary(3, 7)); //3
+            //Console.WriteLine(Binary(1, 7)); //3
+            //Console.WriteLine(Binary(11, 7)); //
+            //Console.WriteLine(Binary(100000000, 100000000)); //3
+
+
+            //Console.WriteLine(solution(new int[] { 1, 1, 3, 3, 3, 4, 5, 5, 5, 5 }, 2)); //5
+            //Console.WriteLine(solution(new int[] { 1, 1, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 6, 6 }, 2));//7
+            //Console.WriteLine(solution(new int[] { 1, 1, 1, 2, 3, 4, 5, 5, 5, 5, 5, 5 }, 0));//6
+            //Console.WriteLine(solution(new int[] { 1, 2, 2, 3 }, 3));//4
+
+            //Console.WriteLine(FibonacciSeries(8));
+
+            //Console.WriteLine(PassingCars(new int[] { 0, 1, 0, 1, 1 }));//5
 
             //PrintArray(MaxCounters(5, new int[] { 3, 4, 4, 6, 1, 4, 4 }));
 
@@ -267,5 +287,82 @@ namespace MyCodilitySolutions
 
             return Passing;
         } //100%
+
+        public static int FibonacciSeries(int n)
+        {
+            if (n == 0) return 0; //To return the first Fibonacci number   
+            if (n == 1) return 1; //To return the second Fibonacci number   
+            return FibonacciSeries(n - 1) + FibonacciSeries(n - 2);
+        }
+
+        public static int solution(int[] A, int K)
+        {
+            int n = A.Length;
+            int best = n - K == 1 ? 1 : 0;
+            int count = 1;
+            for (int i = 0; i < n - K - 1; i++)
+            {//
+                if (A[i] == A[i + 1])
+                    count++;
+                else
+                    count = 1;
+                if (count > best)
+                    best = count;
+            }
+            int result = best + K;
+
+            return result;
+        }
+
+        public static int Binary(int A, int B)
+        {
+            //long!
+            long remainder = 0;
+            int bitsCounter = 0;
+            //string result = "";
+            long turnToBinary = (long)A * B;
+            //Console.WriteLine(long.MaxValue);
+            //Console.WriteLine(turnToBinary);
+
+            while (turnToBinary > 0)
+            {
+                remainder = turnToBinary % 2;
+                turnToBinary /= 2;
+
+                if (remainder == 1)
+                    bitsCounter++;
+                //result = remainder.ToString() + result;
+            }
+            //Console.WriteLine( result);
+            return bitsCounter;
+        }
+
+        public static string solutionString(string S)
+        {
+            string[] TypeAndSize = S.Split('\n');
+            int musicSize = 0, imageSize = 0, movieSize = 0, otherSize = 0;
+
+            for (int i = 0; i < TypeAndSize.Length; i++)
+            {
+                string[] info = TypeAndSize[i].Split(' ');
+                string type = info[0].Split('.').Last();
+                int size = int.Parse(info[1].Replace("b", ""));
+
+                if (type == "mp3" || type == "aac" || type == "flac")
+                    musicSize += size;
+
+                else if (type == "jpg" || type == "bmp" || type == "gif")
+                    imageSize += size;
+
+                else if (type == "mp4" || type == "avi" || type == "mkv")
+                    movieSize += size;
+                else
+                    otherSize += size;
+            }
+
+            string result = string.Format("music {0}b\nimages {1}b\nmovies {2}b\nother {3}b", musicSize, imageSize, movieSize, otherSize);
+            return result;
+        }
+
     }
 }
